@@ -19,6 +19,17 @@ const Register = () => {
 
         if(username && password && confirmPassword && email && confirmPassword === password){
             axios.post("http://localhost:9200/register", user)
+            .then((res)=>{
+                alert( res.data.message)
+                if(res.data.message !== "ERR") {
+                  console.log('Creation Success', res.status)
+                  navigate('/login')
+                }
+                else {
+                  console.log('OUT')
+                  navigate('/register')
+                }
+              })
         }
         else{
             alert("Please give the correct details");

@@ -7,8 +7,6 @@ import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
 
-
-
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -21,7 +19,16 @@ const userLogin = () => {
   axios.post("http://localhost:9200/login", user)
   .then((res)=>{
     alert( res.data.message)
-  }, navigate('/homepage'))
+    if(res.data.message !== "Password didn't match") {
+      console.log('IN',)
+      navigate('/homepage')
+    }
+    else {
+      console.log('OUT')
+      navigate('/login')
+    }
+  })
+  
 
 }
 

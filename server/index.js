@@ -5,9 +5,13 @@ import mongoose from "mongoose";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
-const mongoURI = "mongodb+srv://tanishgupta0707:07121998%40UdhampuR@cluster0.xmwrc50.mongodb.net/mydatabase?retryWrites=true&w=majority"
+
+const mongoURI = "mongodb+srv://ujwalgupta30:Ujwalmongo1@cluster0.vhj6sqt.mongodb.net/?retryWrites=true&w=majority"
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
@@ -34,14 +38,14 @@ app.post("/login", async(req, res) => {
       const user = await User.findOne({ email: email });
       if (user) {
         if(password === user.password) {
-        res.send({ message: "User already logged-in", user:user });
+        res.status(200).send({ message: "User already logged-in", user:user });
         }else{
-            res.send({message:"Pass didn't matched"})
+            res.status(200).send({message:"Password didn't match"})
         }
       } else {
         const newUser = new User({ email, password });
         await newUser.save();
-        res.send({ message: "User logged-in successfully" });
+        res.status(200).send({ message: "User logged-in successfully" });
       }
     } catch (err) {
       res.send(err);
@@ -53,14 +57,14 @@ app.post("/register", async (req, res) => {
     try {
       const user = await User.findOne({ email: email });
       if (user) {
-        res.send({ message: "User already registered" });
+        res.status(200).send({ message: "User already registered" });
       } else {
         const newUser = new User({ username, email, password });
         await newUser.save();
-        res.send({ message: "User saved successfully" });
+        res.ststus(200).send({ message: "User saved successfully" });
       }
     } catch (err) {
-      res.send(err);
+      res.status(200).send({message: "ERR"});
     }
   });
 
