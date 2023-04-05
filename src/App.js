@@ -1,24 +1,41 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+
+import React, { useState } from 'react';
+import Homepage from './components/Homepage/homepage';
+import Login from './components/Login/login';
+import Register from './components/Register/register';
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate
+} from "react-router-dom";
+import "./App.css"
+const routes = [
+  {
+    path: '/',
+    element:<Navigate to="/login" replace />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  },
+  {
+    path: '/homepage',
+    element: <Homepage />,
+  }
+];
+
+const routeConfig = createBrowserRouter(routes);
 
 function App() {
-  const [image, setImage] = useState('');
-
-  useEffect(() => {
-    async function fetchImage() {
-      const response = await axios.get('https://images-api.nasa.gov/search?q=space&media_type=image');
-      const items = response.data.collection.items;
-      const randomIndex = Math.floor(Math.random() * items.length);
-      setImage(items[randomIndex].links[0].href);
-    }
-    fetchImage();
-  }, []);
-
-  return (
-    <div>
-      <img src={image} alt="NASA Random Image" />
-    </div>
-  );
+  return (<div className='App'>
+  <RouterProvider router={routeConfig}/>
+  </div>
+  )
 }
 
 export default App;
