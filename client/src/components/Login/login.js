@@ -16,7 +16,7 @@ const Login = () => {
 
 const userLogin = () => {
   
-  axios.post("http://localhost:9200/login", user)
+  axios.post("http://g-auth-nasa-react-node.vercel.app/login", user)
   .then((res)=>{
     alert( res.data.message)
     if(res.data.message !== "Password didn't match") {
