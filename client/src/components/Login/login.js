@@ -19,7 +19,7 @@ const userLogin = () => {
   axios.post("https://g-auth-nasa-react-node.vercel.app/login", user)
   .then((res)=>{
     alert( res.data.message)
-    if(res.data.message !== "Password didn't match") {
+    if(res.data.message === "User logged-in" ) {
       console.log('IN',)
       navigate('/homepage')
     }
