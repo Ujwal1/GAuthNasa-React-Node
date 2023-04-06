@@ -18,7 +18,7 @@ const Register = () => {
         const { username, email, password, confirmPassword } = user;
 
         if(username && password && confirmPassword && email && confirmPassword === password){
-            axios.post("http://g-auth-nasa-react-node.vercel.app/register", user)
+            axios.post("https://g-auth-nasa-react-node.vercel.app/register", user)
             .then((res)=>{
                 alert( res.data.message)
                 if(res.data.message !== "ERR") {
