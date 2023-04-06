@@ -20,7 +20,7 @@ const userLogin = () => {
   .then((res)=>{
     alert( res.data.message)
     if(res.data.message === "User logged-in" ) {
-      console.log('IN',)
+      console.log('IN', res)
       navigate('/homepage')
     }
     else {
